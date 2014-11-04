@@ -8,4 +8,13 @@ class calculator():
         self.total = 0
         # Input from the user
         self.input = ""
+
+
+#calc = calculator()
+window = Tk()
+canvas = Canvas(window, width = 515, height = 515)
+canvas.grid(row = 0, column = 0)
+canvas.update_idletasks()
+
+
         
