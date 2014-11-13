@@ -1,4 +1,4 @@
 gui-calculator
 ==============
 
-A GUI calculator
+A GUI calculator.
