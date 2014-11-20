@@ -1,4 +1,4 @@
-from Tkinter import Tk, W, E, FLAT
+from Tkinter import Tk, W, E, FLAT, RIGHT
 from ttk import Frame, Button, Label, Style, Entry
 import Tkinter
 
@@ -34,12 +34,12 @@ class Calculator(Frame):
             self.rowconfigure(i, pad = 3)
         
         # Entry widget is where digits are displayed
-        entry =  Entry(self)
+        entry = Entry(self, justify = RIGHT)
         
         # Place in first row and span 4 columns. Sticky expands widget in a given direction.
         # In this case from left to right
         entry.grid(row = 0, columnspan = 4, sticky = W + E)
-        
+                
         # Clear button, Second row, first column
         clear_button = Button(self, text = "Clr")
         clear_button.grid(row = 1, column = 0)
@@ -118,8 +118,7 @@ class Calculator(Frame):
         
         # Plus button
         plus_button = Button(self, text = "+");
-        plus_button.grid(row = 5, column = 3);
-        
+        plus_button.grid(row = 5, column = 3);    
                 
         # Show the fram widget and gives it an initial size
         self.pack()
@@ -130,7 +129,9 @@ class Calculator(Frame):
         # Configure Button widget with padding and font
         Style().configure("TButton", padding = (0, 5, 0, 5), font = "serif 10")
         
-        
+    # Insert numbers in the Entry widget
+    def insert_number(self, entry, value):
+        entry.insert(1, value);
 
 
 #################### Main function ####################
