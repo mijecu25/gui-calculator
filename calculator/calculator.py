@@ -1,4 +1,4 @@
-from Tkinter import Tk, W, E, FLAT, RIGHT
+from Tkinter import Tk, W, E, FLAT, RIGHT, END
 from ttk import Frame, Button, Label, Style, Entry
 import Tkinter
 
@@ -35,6 +35,7 @@ class Calculator(Frame):
         
         # Entry widget is where digits are displayed
         entry = Entry(self, justify = RIGHT)
+        # TODO add 0 as default
         
         # Place in first row and span 4 columns. Sticky expands widget in a given direction.
         # In this case from left to right
@@ -53,72 +54,72 @@ class Calculator(Frame):
         empty.grid(row = 1, column = 2)
         
         # Close button
-        close_button = Button(self, text = "Close")
+        close_button = Button(self, text = "Close", command = self.quit_app)
         close_button.grid(row = 1, column = 3)
         
         # 7 button
-        seven_button = Button(self, text = "7");
-        seven_button.grid(row = 2, column = 0);
+        seven_button = Button(self, text = "7", command = lambda: self.insert_int(entry, "7"))
+        seven_button.grid(row = 2, column = 0)
         
         # 8 button
-        eight_button = Button(self, text = "8");
-        eight_button.grid(row = 2, column = 1);
+        eight_button = Button(self, text = "8", command = lambda: self.insert_int(entry, "8"))
+        eight_button.grid(row = 2, column = 1)
         
         # 9 button
-        nine_button = Button(self, text = "9");
-        nine_button.grid(row = 2, column = 2);
+        nine_button = Button(self, text = "9", command = lambda: self.insert_int(entry, "9"))
+        nine_button.grid(row = 2, column = 2)
         
         # Division button
-        division_button = Button(self, text = "/");
-        division_button.grid(row = 2, column = 3);
+        division_button = Button(self, text = "/")
+        division_button.grid(row = 2, column = 3)
         
         # 4 button
-        four_button = Button(self, text = "4");
-        four_button.grid(row = 3, column = 0);
+        four_button = Button(self, text = "4", command = lambda: self.insert_int(entry, "4"))
+        four_button.grid(row = 3, column = 0)
         
         # 5 button
-        five_button = Button(self, text = "5");
-        five_button.grid(row = 3, column = 1);
+        five_button = Button(self, text = "5", command = lambda: self.insert_int(entry, "5"))
+        five_button.grid(row = 3, column = 1)
         
         # 6 button
-        six_button = Button(self, text = "6");
-        six_button.grid(row = 3, column = 2);
+        six_button = Button(self, text = "6", command = lambda: self.insert_int(entry, "6"))
+        six_button.grid(row = 3, column = 2)
         
         # Multiplication button
-        multiply_button = Button(self, text = "*");
-        multiply_button.grid(row = 3, column = 3);
+        multiply_button = Button(self, text = "*")
+        multiply_button.grid(row = 3, column = 3)
         
         # 1 button
-        one_button = Button(self, text = "1");
-        one_button.grid(row = 4, column = 0);
+        one_button = Button(self, text = "1", command = lambda: self.insert_int(entry, "1"))
+        one_button.grid(row = 4, column = 0)
         
         # 2 button
-        two_button = Button(self, text = "2");
-        two_button.grid(row = 4, column = 1);
+        two_button = Button(self, text = "2", command = lambda: self.insert_int(entry, "2"))
+        two_button.grid(row = 4, column = 1)
         
         # 3 button
-        three_button = Button(self, text = "3");
-        three_button.grid(row = 4, column = 2);
+        three_button = Button(self, text = "3", command = lambda: self.insert_int(entry, "3"))
+        three_button.grid(row = 4, column = 2)
         
         # Minus button
-        minus_button = Button(self, text = "-");
-        minus_button.grid(row = 4, column = 3);
+        minus_button = Button(self, text = "-")
+        minus_button.grid(row = 4, column = 3)
         
         # Dot button
-        dot_button = Button(self, text = ".");
-        dot_button.grid(row = 5, column = 0);
+        dot_button = Button(self, text = ".")
+        dot_button.grid(row = 5, column = 0)
         
         # 0 button
-        zero_button = Button(self, text = "0");
-        zero_button.grid(row = 5, column = 1);
+        zero_button = Button(self, text = "0", command = lambda: self.insert_int(entry, "0"))
+        zero_button.grid(row = 5, column = 1)
         
         # Equal button
-        equal_button = Button(self, text = "=");
-        equal_button.grid(row = 5, column = 2);
+        equal_button = Button(self, text = "=")
+        equal_button.grid(row = 5, column = 2)
         
         # Plus button
-        plus_button = Button(self, text = "+");
-        plus_button.grid(row = 5, column = 3);    
+        plus_button = Button(self, text = "+")
+        plus_button.grid(row = 5, column = 3)    
                 
         # Show the fram widget and gives it an initial size
         self.pack()
@@ -129,10 +130,25 @@ class Calculator(Frame):
         # Configure Button widget with padding and font
         Style().configure("TButton", padding = (0, 5, 0, 5), font = "serif 10")
         
-    # Insert numbers in the Entry widget
-    def insert_number(self, entry, value):
-        entry.insert(1, value);
-
+    # Insert int in the Entry widget
+    def insert_int(self, entry, value):
+        # Get the current contents of the entry widget
+        current = entry.get();
+        
+        # Concatenate the new value
+        current = current + value
+        
+        # Delete all the contents fo the entry widget
+        entry.delete(0, Tkinter.END)
+        
+        # Insert the new contents as an int
+        entry.insert(0, int(current))
+        
+    # Quit the application
+    def quit_app(self):
+        print "Bye"
+        self.quit()
+        
 
 #################### Main function ####################
 def Main():
