@@ -35,7 +35,7 @@ class Calculator(Frame):
         
         # Entry widget is where digits are displayed
         entry = Entry(self, justify = RIGHT)
-        # TODO add 0 as default
+        self.insert_int(entry, "0")
         
         # Place in first row and span 4 columns. Sticky expands widget in a given direction.
         # In this case from left to right
