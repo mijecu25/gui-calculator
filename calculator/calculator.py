@@ -35,14 +35,14 @@ class Calculator(Frame):
         
         # Entry widget is where digits are displayed
         entry = Entry(self, justify = RIGHT)
-        self.insert_int(entry, "0")
+        self.clear(entry)
         
         # Place in first row and span 4 columns. Sticky expands widget in a given direction.
         # In this case from left to right
         entry.grid(row = 0, columnspan = 4, sticky = W + E)
                 
         # Clear button, Second row, first column
-        clear_button = Button(self, text = "Clr")
+        clear_button = Button(self, text = "Clr", command = lambda: self.clear(entry))
         clear_button.grid(row = 1, column = 0)
         
         # Back button
@@ -148,6 +148,13 @@ class Calculator(Frame):
     def quit_app(self):
         print "Bye"
         self.quit()
+        
+    def clear(self, entry):
+        # Delete all the contents fo the entry widget
+        entry.delete(0, Tkinter.END)
+        
+        entry.insert(0, int(0))
+        
         
 
 #################### Main function ####################
