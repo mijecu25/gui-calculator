@@ -46,7 +46,7 @@ class Calculator(Frame):
         clear_button.grid(row = 1, column = 0)
         
         # Back button
-        back_button = Button(self, text = "Back")
+        back_button = Button(self, text = "Back", command = lambda: self.back(entry))
         back_button.grid(row = 1, column = 1)
         
         # Empty space that uses the Tkinter button in order to make it flat
@@ -149,13 +149,28 @@ class Calculator(Frame):
         print "Bye"
         self.quit()
         
+    # Clear the entries
     def clear(self, entry):
         # Delete all the contents fo the entry widget
         entry.delete(0, Tkinter.END)
         
+        # Insert 0
         entry.insert(0, int(0))
         
+    # Delete the last added number    
+    def back(self, entry):
+        # Get the current contents and clear
+        current = entry.get()
+        entry.delete(0, Tkinter.END)
         
+        if(len(current) > 1):
+            # Slice out the last number
+            current = current[0:len(current) - 1]
+
+            # Add the new number
+            entry.insert(0, int(current))
+        else:
+            self.clear(entry)
 
 #################### Main function ####################
 def Main():
