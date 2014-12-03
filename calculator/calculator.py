@@ -16,6 +16,8 @@ class Calculator(Frame):
         # Initialize the window
         self.initUI()
         
+        self.current_num = 0;
+        
         
     # Initialize the UI
     def initUI(self):
@@ -114,17 +116,32 @@ class Calculator(Frame):
         zero_button.grid(row = 5, column = 1)
         
         # Equal button
-        equal_button = Button(self, text = "=")
+        equal_button = Button(self, text = "=", command = lambda: self.equals(entry))
         equal_button.grid(row = 5, column = 2)
         
         # Plus button
-        plus_button = Button(self, text = "+")
+        plus_button = Button(self, text = "+", command =lambda: self.add(entry))
         plus_button.grid(row = 5, column = 3)    
                 
         # Show the fram widget and gives it an initial size
         self.pack()
         
+    # Add numbers
+    def add(self, entry):
+        # Get the current number
+        self.current_num = entry.get()
         
+        # Clear the text box
+        self.clear(entry)
+        
+    # Print the current total
+    def equals(self, entry):
+        # Delete all the contents fo the entry widget
+        entry.delete(0, Tkinter.END)
+        
+        # Insert the new contents as an int
+        entry.insert(0, int(self.current_num))
+                
     # Set the style of the window
     def style(self):
         # Configure Button widget with padding and font
@@ -149,7 +166,7 @@ class Calculator(Frame):
         print "Bye"
         self.quit()
         
-    # Clear the entries
+    # Clear the entries in the text box and inserts a 0
     def clear(self, entry):
         # Delete all the contents fo the entry widget
         entry.delete(0, Tkinter.END)
@@ -157,7 +174,7 @@ class Calculator(Frame):
         # Insert 0
         entry.insert(0, int(0))
         
-    # Delete the last added number    
+    # Delete the last added number in the text boc
     def back(self, entry):
         # Get the current contents and clear
         current = entry.get()
