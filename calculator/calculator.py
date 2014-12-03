@@ -16,9 +16,22 @@ class Calculator(Frame):
         # Initialize the window
         self.initUI()
         
-        self.current_num = 0;
+        # Running total 
+        self.current_total = 0
         
+        # Current number
+        self.current_num = 0
         
+        # Current operation
+        # 0 -> None
+        # 1 -> Add
+        # 2 -> Substract
+        # 3 -> Multiply
+        # 4 -> Divide
+        self.operation = 0
+        
+        self.max_operations = 4
+                
     # Initialize the UI
     def initUI(self):
         # Set the style of the window
@@ -128,25 +141,61 @@ class Calculator(Frame):
         
     # Add numbers
     def add(self, entry):
+        # Set the operation to add
+        self.operation = 1
+                
         # Get the current number
-        self.current_num = entry.get()
+        self.current_num = int(entry.get())
         
-        # Clear the text box
-        self.clear(entry)
+        # Do current operation
+        self.do_operation(entry)
+        
+        # Delete all the contents fo the entry widget
+        entry.delete(0, Tkinter.END)
+        
+        # Insert 0
+        entry.insert(0, int(0))
         
     # Print the current total
     def equals(self, entry):
+        if(self.operation == 0):
+            return
+        
+        # TODO this is a bug when clicking equals multiple times
+        # Get the current number
+        self.current_num = int(entry.get())
+        
+        # Do current opertaion
+        self.do_operation(entry)
+        
+        # Set current operation to null
+        self.operation = 0
+        
+        # Set the current number to 0
+        self.current_num = 0
+        
         # Delete all the contents fo the entry widget
         entry.delete(0, Tkinter.END)
         
         # Insert the new contents as an int
-        entry.insert(0, int(self.current_num))
-                
-    # Set the style of the window
-    def style(self):
-        # Configure Button widget with padding and font
-        Style().configure("TButton", padding = (0, 5, 0, 5), font = "serif 10")
+        entry.insert(0, int(self.current_total))
         
+    # Do the current operation
+    def do_operation(self, entry):
+        print "current total: " + str(self.current_total) + " current num: " + str(self.current_num)
+        if(self.operation == 0 or self.operation > self.max_operations):
+            # No operation or a non operation number
+            print "Error! Contact developer"
+        elif(self.operation == 1): 
+            # Add the numbers
+            self.current_total = self.current_total + self.current_num
+        elif(self.operation == 2):
+            print "Subtract the numbers"
+        elif(self.operation == 3):
+            print "Multiply the numbers"
+        elif(self.operation == 4):
+            print "Divide the numbers"
+                                    
     # Insert int in the Entry widget
     def insert_int(self, entry, value):
         # Get the current contents of the entry widget
@@ -160,23 +209,21 @@ class Calculator(Frame):
         
         # Insert the new contents as an int
         entry.insert(0, int(current))
-        
-    # Quit the application
-    def quit_app(self):
-        print "Bye"
-        self.quit()
-        
-    # Clear the entries in the text box and inserts a 0
+                
+    # Clear the whole calculator as if the app was just opened
     def clear(self, entry):
-        # Delete all the contents fo the entry widget
-        entry.delete(0, Tkinter.END)
+        # Clear textbox
+        self.delete_textbox(entry)
         
-        # Insert 0
-        entry.insert(0, int(0))
+        # Set current total to 0
+        self.current_total = 0
         
-    # Delete the last added number in the text boc
+        # Set current number to 0
+        self.current_num = 0
+        
+    # Delete the last added number in the text box
     def back(self, entry):
-        # Get the current contents and clear
+        # Get the current contents and delete textbox content
         current = entry.get()
         entry.delete(0, Tkinter.END)
         
@@ -187,7 +234,25 @@ class Calculator(Frame):
             # Add the new number
             entry.insert(0, int(current))
         else:
-            self.clear(entry)
+            self.delete_textbox(entry)
+            
+    # Deletes the contents of the entry and puts a 0
+    def delete_textbox(self, entry):
+        # Delete all the contents fo the entry widget
+        entry.delete(0, Tkinter.END)
+        
+        # Insert 0
+        entry.insert(0, int(0))
+        
+    # Quit the application
+    def quit_app(self):
+        print "Bye"
+        self.quit()
+        
+    # Set the style of the window
+    def style(self):
+        # Configure Button widget with padding and font
+        Style().configure("TButton", padding = (0, 5, 0, 5), font = "serif 10")
 
 #################### Main function ####################
 def Main():
