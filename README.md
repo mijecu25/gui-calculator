@@ -3,6 +3,8 @@ gui-calculator
 
 A GUI calculator that performs basic mathematical operations. It can add, substract, multiply, and divide integers.
 
+Made Mijecu25 owner of this repo.
+
 ==============
 The MIT License (MIT)
 
