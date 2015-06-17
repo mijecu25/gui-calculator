@@ -1,6 +1,8 @@
 gui-calculator
 ==============
 
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/mijecu25/gui-calculator/master/LICENSE)
+
 A GUI calculator that performs basic mathematical operations. It can add, substract, multiply, and divide integers.
 
 ==============
