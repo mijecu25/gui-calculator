@@ -8,7 +8,7 @@ A GUI calculator that performs basic mathematical operations. It can add, substr
 ==============
 The MIT License (MIT)
 
-Copyright (c) 2014 Miguel Velez
+Copyright (c) 2015 Miguel Velez
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
