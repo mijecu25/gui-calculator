@@ -5,7 +5,8 @@ gui-calculator
 
 A GUI calculator that performs basic mathematical operations. It can add, substract, multiply, and divide integers.
 
-==============
+## License
+
 The MIT License (MIT)
 
 Copyright (c) 2015 Miguel Velez
